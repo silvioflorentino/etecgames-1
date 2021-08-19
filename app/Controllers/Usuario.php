@@ -2,12 +2,11 @@
 
 namespace App\Controllers;
 
-class Home extends BaseController
-{
+class Usuario extends BaseController {
 	public function index()
 	{
 		echo view('header');
-		echo view('areaAdm');
+		echo view('cadUsuario');
 		echo view('footer');
 	}
 }
