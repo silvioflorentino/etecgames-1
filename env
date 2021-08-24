@@ -38,10 +38,18 @@ app.baseURL = 'http://localhost/2021/etecgames/public/'
 #--------------------------------------------------------------------
 
 # database.default.hostname = localhost
-# database.default.database = ci4
+# database.default.database = etecgames
 # database.default.username = root
-# database.default.password = root
+# database.default.password = (SenhaWorkbench)
 # database.default.DBDriver = MySQLi
+
+# PHP My Admin
+database.default.hostname = 127.0.0.1:3308
+database.default.database = etecgames
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+
 # database.default.DBPrefix =
 
 # database.tests.hostname = localhost
