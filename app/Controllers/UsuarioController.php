@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Usuario extends BaseController {
+class UsuarioController extends BaseController {
 	public function index()
 	{
 		echo view('header');
@@ -14,10 +14,15 @@ class Usuario extends BaseController {
 	{
 		$data['msg'] = '';
 		$request = service('request');
+
 		if($request -> getMethod() === 'post') {
 			$UsuarioModelo = new \App\Models\UsuarioModel();
 			$UsuarioModelo->set('emailusu', $request->getPost('emailusu'));
-			$UsuarioModelo->set('senhausu', $request->getPost('senhausu'));
+			
+			$opcao = ['cost' => 8];
+			$senhacrip = password_hash($request->getPost('senhausu'), PASSWORD_BCRYPT, $opcao);
+
+			$UsuarioModelo->set('senhausu', $senhacrip);
 
 			if($UsuarioModelo->insert()) {
 				$data['msg'] = 'Informações cadastradas com sucesso';
