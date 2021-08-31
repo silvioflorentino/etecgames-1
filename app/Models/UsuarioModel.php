@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 class UsuarioModel extends Model 
 {
     protected $table = 'usuario_tb';
-    protected $primarykey = 'codusu';
+    protected $primaryKey = 'codusu';
     protected $allowedFields = ['emailusu', 'senhausu'];
     protected $returnType = 'object';
 }
