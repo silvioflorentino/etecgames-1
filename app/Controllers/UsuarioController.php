@@ -40,6 +40,12 @@ class UsuarioController extends BaseController {
 		$registros = $UsuarioModel -> find();
 		$data['usuarios'] = $registros;
 
+		$request = service('request');
+		$codusuario = $request->getPost('codUsu');
+		if($codusuario) {
+			$this->deletarUsuario($codusuario);
+		}
+
 		echo view('header');
 		echo view('listaUsuario', $data);
 		echo view('footer');
@@ -56,6 +62,23 @@ class UsuarioController extends BaseController {
 		echo view('listaCodUsu', $data);
 		echo view('footer');
 	}
+	public function alterarUsuario() {
+	}
+
+	public function deletarUsuario($codusuario) {
+		if(is_null($codusuario)) {
+			return redirect()->to(base_url('UsuarioController/todosUsuarios'));
+		}
+		$UsuarioModel = new \App\Models\UsuarioModel();
+		if($UsuarioModel->delete($codusuario)) {
+			return redirect()->to(base_url('UsuarioController/todosUsuarios'));
+		} else {
+			return redirect()->to(base_url('UsuarioController/todosUsuarios'));;
+		}
+		return redirect()->to(base_url('UsuarioController/todosUsuarios'));;
+
+	}
+
 }
 
 ?>
