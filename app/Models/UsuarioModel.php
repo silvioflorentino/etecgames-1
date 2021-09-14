@@ -7,6 +7,6 @@ class UsuarioModel extends Model
 {
     protected $table = 'usuario_tb';
     protected $primaryKey = 'codusu';
-    protected $allowedFields = ['emailusu', 'senhausu'];
+    protected $allowedFields = ['emailUsu', 'SenhaUsu'];
     protected $returnType = 'object';
 }
