@@ -17,12 +17,12 @@ class UsuarioController extends BaseController {
 
 		if($request -> getMethod() === 'post') {
 			$UsuarioModelo = new \App\Models\UsuarioModel();
-			$UsuarioModelo->set('emailusu', $request->getPost('emailusu'));
+			$UsuarioModelo->set('emailUsu', $request->getPost('emailusu'));
 			
 			$opcao = ['cost' => 8];
 			$senhacrip = password_hash($request->getPost('senhausu'), PASSWORD_BCRYPT, $opcao);
 
-			$UsuarioModelo->set('senhausu', $senhacrip);
+			$UsuarioModelo->set('SenhaUsu', $senhacrip);
 
 			if($UsuarioModelo->insert()) {
 				$data['msg'] = 'Informações cadastradas com sucesso';

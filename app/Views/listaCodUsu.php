@@ -13,6 +13,8 @@
 <?php 
 $codusuario = isset($usuario->codusu) ? $usuario->codusu : "";
 $emailusu = isset($usuario->emailUsu) ? $usuario->emailUsu : "";
+
+if($codusuario) :
 ?>
 <div class='mt-5 rounded border border-success p-4'>
 <h2>Resultado:</h2>
@@ -31,3 +33,4 @@ $emailusu = isset($usuario->emailUsu) ? $usuario->emailUsu : "";
     </tbody>
 </table>
 </div>
+<?php endif ?>
