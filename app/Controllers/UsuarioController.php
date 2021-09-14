@@ -87,7 +87,7 @@ class UsuarioController extends BaseController {
 			$getSenha = $request->getPost('senhaUsu');
 			if(isset($getSenha) && $getSenha != null) {
 				$opcao = ['cost' => 8];
-				$senhaUsu = password_hash($request->getPost('senhaUsu'), PASSWORD_BCRYPT, $opcao);
+				$senhaUsu = password_hash($getSenha, PASSWORD_BCRYPT, $opcao);
 				$registros->SenhaUsu = $senhaUsu;
 			}
 
