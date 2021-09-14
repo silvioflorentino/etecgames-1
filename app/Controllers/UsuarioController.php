@@ -83,6 +83,14 @@ class UsuarioController extends BaseController {
 	
 		if($codUsuAlterar) {
 			$registros->emailUsu = $emailUsu;
+
+			$getSenha = $request->getPost('senhaUsu');
+			if(isset($getSenha) && $getSenha != null) {
+				$opcao = ['cost' => 8];
+				$senhaUsu = password_hash($request->getPost('senhaUsu'), PASSWORD_BCRYPT, $opcao);
+				$registros->SenhaUsu = $senhaUsu;
+			}
+
 			if($UsuarioModel->update($codUsuAlterar, $registros)) {
 				return redirect()->to(base_url('UsuarioController/todosUsuarios'));
 			} else {

@@ -32,13 +32,14 @@
             </div>
             <form method="POST">
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label for="codusuario" class="col-form-label">Codigo:</label>
-                        <input type="text" name="codUsuAlterar" class="codigo form-control" id="codusuario" readonly>
-                    </div>
+                    <input type="hidden" name="codUsuAlterar" class="codigo form-control" id="codusuario" readonly>
                     <div class="mb-3">
                         <label for="email" class="col-form-label">Email:</label>
                         <input type="text" name="emailUsu" class="email form-control" id="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="senha" class="col-form-label">Nova Senha:</label>
+                        <input type="password" name="senhaUsu" class="form-control" id="senha" placeholder="(Deixe em branco para não alterar)">
                     </div>
                 </div>
                 <div class="modal-footer">
