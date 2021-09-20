@@ -44,14 +44,14 @@ class UsuarioController extends BaseController {
 
 		$codusuario = $request->getPost('codUsu');
 		if($codusuario) {
-			$this->deletarUsuario($codusuario);
+			$this->deletarUsuario($codusuario, 0);
 			return redirect()->to(base_url('UsuarioController/todosUsuarios'));
 		}
 		
 		$codUsuAlterar = $request->getPost('codUsuAlterar');
 		if($codUsuAlterar) {
 			
-			$this->alterarUsuario($codUsuAlterar);
+			$this->alterarUsuario($codUsuAlterar, 0);
 			return redirect()->to(base_url('UsuarioController/todosUsuarios'));
 		}
 
@@ -62,18 +62,36 @@ class UsuarioController extends BaseController {
 	public function listaCodUsuario() {
 		$request = service('request');
 		$codusuario = $request->getPost('codUsu');
+		$codUsuDel = $request->getPost('codUsuDel');
+		$codUsuAlterar = $request->getPost('codUsuAlterar');
+
+		if($codUsuDel) {
+			$this->deletarUsuario($codUsuDel, 1);
+			//return redirect()->to(base_url('UsuarioController/listaCodUsuario'));
+		}
+		else if($codUsuAlterar) {
+			$this->alterarUsuario($codUsuAlterar, 1);
+			//return redirect()->to(base_url('UsuarioController/listaCodUsuario'));
+		}
+
 		$UsuarioModel = new \App\Models\UsuarioModel();
 		$registros = $UsuarioModel->find($codusuario);
-		
 		$data['usuario'] = $registros;
-
 		echo view('header');
 		echo view('listaCodUsu', $data);
 		echo view('footer');
+
+		
 	}
-	public function alterarUsuario($codUsuAlterar=null) {
+	public function alterarUsuario($codUsuAlterar=null, $page=null) {
+
+		if($page == 1)
+			$pageName = 'UsuarioController/listaCodUsuario';
+		else
+			$pageName = 'UsuarioController/todosUsuarios';
+
 		if(is_null($codUsuAlterar)) {
-			return redirect()->to(base_url('UsuarioController/todosUsuarios'));
+			return redirect()->to(base_url($pageName));
 		}
 		$request = service('request');
 		$emailUsu = $request->getPost('emailUsu');
@@ -92,22 +110,28 @@ class UsuarioController extends BaseController {
 			}
 
 			if($UsuarioModel->update($codUsuAlterar, $registros)) {
-				return redirect()->to(base_url('UsuarioController/todosUsuarios'));
+				return redirect()->to(base_url($pageName));
 			} else {
-				return redirect()->to(base_url('UsuarioController/todosUsuarios'));
+				return redirect()->to(base_url($pageName));
 			}
 		}
 	}
 
-	public function deletarUsuario($codusuario) {
+	public function deletarUsuario($codusuario=null, $page=null) {
+		if($page == 1)
+			$pageName = 'UsuarioController/listaCodUsuario';
+		else
+			$pageName = 'UsuarioController/todosUsuarios';
+
 		if(is_null($codusuario)) {
-			return redirect()->to(base_url('UsuarioController/todosUsuarios'));
+			return redirect()->to(base_url($pageName));
 		}
+
 		$UsuarioModel = new \App\Models\UsuarioModel();
 		if($UsuarioModel->delete($codusuario)) {
-			return redirect()->to(base_url('UsuarioController/todosUsuarios'));
+			return redirect()->to(base_url($pageName));
 		} else {
-			return redirect()->to(base_url('UsuarioController/todosUsuarios'));
+			return redirect()->to(base_url($pageName));
 		}
 	}
 
